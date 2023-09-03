@@ -1,17 +1,19 @@
 'use client'
 import { completeTodo } from '@/utils/actions'
+import { TodoProps } from '@/types/todos'
+import { type } from 'os'
 import { useTransition } from 'react'
 
-const Todo = ({ todo }) => {
+const Todo = ({ id, createdAt, content, completed }: TodoProps) => {
   const [isPending, startTransition] = useTransition()
   return (
     <div
       className={`border border-black/25 cursor-pointer ${
-        todo.completed ? 'line-through text-gray-900' : ''
+        completed ? 'line-through text-gray-900' : ''
       }`}
-      onClick={() => startTransition(() => completeTodo(todo.id))}
+      onClick={() => startTransition(() => completeTodo(id))}
     >
-      {todo.content}
+      {content}
     </div>
   )
 }
